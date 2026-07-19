@@ -332,6 +332,8 @@
     const scene = document.getElementById("scene-2");
     const box = document.getElementById("gift-box");
     const sparkleField = document.getElementById("gift-sparkles");
+    const audioEl = document.getElementById("bg-audio");
+    const toggleBtn = document.getElementById("music-toggle");
     let opened = false;
 
     function openGift() {
@@ -342,6 +344,15 @@
       burstSparkles(sparkleField, 26);
       launchConfetti(60);
       burstHeartsFrom(box);
+
+      // --- গিফট ট্যাপ করলে গান চালু করার কোড ---
+      if (audioEl && audioEl.src) {
+        audioEl.play().catch(err => console.log("Audio play blocked:", err));
+        if (toggleBtn) {
+          toggleBtn.classList.add("playing");
+        }
+      }
+
       const nextBtn = document.getElementById("next-gift");
       if (nextBtn) setTimeout(() => nextBtn.classList.add("show"), 1400);
     }
